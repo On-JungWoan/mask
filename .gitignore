@@ -1,4 +1,5 @@
 # for me
+*.gz
 *.mp4
 dataset/
 results/

@@ -11,7 +11,7 @@ conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=
 pip install -r requirements.txt
 
 # download datasets
-gdown 1XDIdwYwNwgK2TF5f9EdW7F2tU077dzau
+gdown 1xuSMH7ZkfQLvb7KGJJuhP90LCd1uqjXT
 tar -zxvf dataset.tar.gz && rm dataset.tar.gz
 
 # download ckpts
