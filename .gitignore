@@ -1,5 +1,7 @@
 # for me
-
+*.mp4
+dataset/
+results/
 
 # sam2
 .vscode/

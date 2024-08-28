@@ -206,6 +206,11 @@ class PromptGUI(object):
 
     def save_masks_to_dir(self, output_dir: str) -> str:
         assert self.color_masks_all is not None
+        
+        seq_name, _, seq_num = output_dir.split('/')[-3:]
+        prj_root = os.path.normpath(os.path.join(output_dir, '../../../..'))
+        output_dir = f'{prj_root}/results/{seq_name}/{seq_num}'
+        
         os.makedirs(output_dir, exist_ok=True)
         for img_path, clr_mask, id_mask in zip(self.img_paths, self.color_masks_all, self.index_masks_all):
             name = os.path.basename(img_path)
@@ -531,11 +536,12 @@ if __name__ == "__main__":
     parser.add_argument("--model_cfg", type=str, default="sam2_hiera_l.yaml")
     parser.add_argument("--root_dir", type=str, required=True)
     parser.add_argument("--vid_name", type=str, default="videos")
-    parser.add_argument("--img_name", type=str, default="images")
+    parser.add_argument("--img_name", type=str, default="splited")
     parser.add_argument("--mask_name", type=str, default="masks")
     args = parser.parse_args()
 
     # device = "cuda" if torch.cuda.is_available() else "cpu"
+    args.root_dir = os.path.abspath(args.root_dir)
 
     demo = make_demo(
         args.checkpoint_dir,
@@ -544,4 +550,4 @@ if __name__ == "__main__":
         args.vid_name,
         args.img_name,
     )
-    demo.launch(server_port=args.port)
+    demo.launch(server_port=args.port, share=True)

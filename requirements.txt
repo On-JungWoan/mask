@@ -1,7 +1,10 @@
 loguru
 imageio
+imageio[ffmpeg]
+imageio[pyav]
 numpy==1.23.1
 gradio==4.39.0
 gradio_client==1.1.1
 opencv-python==4.10.0.84
 opencv-python-headless==4.10.0.84
+hydra-core
