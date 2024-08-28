@@ -207,9 +207,9 @@ class PromptGUI(object):
     def save_masks_to_dir(self, output_dir: str) -> str:
         assert self.color_masks_all is not None
         
-        seq_name, _, seq_num = output_dir.split('/')[-3:]
-        prj_root = os.path.normpath(os.path.join(output_dir, '../../../..'))
-        output_dir = f'{prj_root}/results/{seq_name}/{seq_num}'
+        seq_name, _, seq_num, mode = output_dir.split('/')[-4:]
+        prj_root = os.path.normpath(os.path.join(output_dir, '../../../../..'))
+        output_dir = f'{prj_root}/results/{seq_name}/{seq_num}/{mode}'
         
         os.makedirs(output_dir, exist_ok=True)
         for img_path, clr_mask, id_mask in zip(self.img_paths, self.color_masks_all, self.index_masks_all):
@@ -353,7 +353,7 @@ def make_demo(
                 submit_button = gr.Button("Submit mask for tracking")
                 final_video = gr.Video(label="Masked video")
                 mask_dir_field = gr.Text(
-                    None, label="Path to save masks", interactive=False
+                    None, label="Path to save masks", interactive=True
                 )
                 save_button = gr.Button("Save masks")
 
@@ -371,6 +371,9 @@ def make_demo(
 
         def update_mask_dir(root_dir, mask_name, seq_name):
             return f"{root_dir}/{mask_name}/{seq_name}"
+        
+        def update_dir(dir):
+            return dir
 
         def update_root_paths(root_dir, vid_name, img_name, mask_name, seq_name):
             return (
@@ -462,6 +465,11 @@ def make_demo(
         mask_name_field.submit(
             update_mask_dir,
             [root_dir_field, mask_name_field, seq_name_field],
+            outputs=[mask_dir_field],
+        )
+        mask_dir_field.submit(
+            update_dir,
+            [mask_dir_field],
             outputs=[mask_dir_field],
         )
 

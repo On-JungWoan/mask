@@ -1,6 +1,6 @@
 #!/bin/bash
 
-seq_name='arctic_s03_box_grab_01_1'
+seq_name=$1
 
 # activate venv
 conda activate mask
