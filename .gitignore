@@ -1,4 +1,5 @@
 # for me
+inputs/
 *.gz
 *.mp4
 dataset/
