@@ -396,7 +396,7 @@ def make_demo(
         ):
             seq_name = os.path.splitext(vid_file)[0]
             vid_path = f"{root_dir}/{vid_name}/{vid_file}"
-            out_dir = f"{root_dir}/{img_name}/{seq_name}"
+            out_dir = f"{root_dir}/{seq_name}"
             guru.debug(f"Extracting frames to {out_dir}")
             os.makedirs(out_dir, exist_ok=True)
 

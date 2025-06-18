@@ -1,4 +1,5 @@
 # for me
+*.jpg
 inputs/
 *.gz
 *.mp4

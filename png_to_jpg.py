@@ -29,4 +29,8 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
     
-    main(args)
+    root = op.join(os.getcwd(), 'inputs')
+    all_path = [op.join(root, d) for d in os.listdir('inputs') if d != '_' and d != 'backup' and d != 'videos']
+    for p in all_path:
+        args.root_dir = p
+        main(args)
