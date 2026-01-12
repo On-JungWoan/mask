@@ -25,8 +25,16 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     
-    parser.add_argument("--root_dir", type=str, default='/home/user/ojw/BIGS_release/ml-hugs/preprocess/mask/inputs/custom')
+    parser.add_argument("--root_dir", type=str, default=None)
+    parser.add_argument("--proc_folder", action='store_true')
     
-    args = parser.parse_args()
+    args = parser.parse_known_args()[0]
     
-    main(args)
+    if args.proc_folder:
+        root = op.join(os.getcwd(), 'inputs')
+        all_path = [op.join(root, d) for d in os.listdir('inputs') if d != '_' and d != 'backup' and d != 'videos']
+        for p in all_path:
+            args.root_dir = p
+            main(args)
+    else:
+        main(args)
